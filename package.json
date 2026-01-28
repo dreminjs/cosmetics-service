@@ -10,13 +10,18 @@
     "client:test": "lerna run test --scope=@cosmetic-services/client",
     "admin:dev": "lerna run dev --scope=@cosmetic-services/admin",
     "admin:build": "lerna run build --scope=@cosmetic-services/admin",
-    "admin:test": "lerna run test --scope=@cosmetic-services/admin"
+    "admin:test": "lerna run test --scope=@cosmetic-services/admin",
+    "shared:build": "lerna run build --scope=@cosmetic-services/types"
   },
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@nestjs/jwt": "^11.0.2",
+    "@nestjs/swagger": "^11.2.5"
+  },
   "devDependencies": {
-    "lerna": "^9.0.3"
+    "lerna": "^9.0.3",
+    "tsconfig-paths": "^4.2.0"
   }
 }

@@ -2,9 +2,10 @@
   "name": "@cosmetic-services/types",
   "version": "0.0.0",
   "homepage": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "ISC",
   "author": "andrew dremin <sankoa230@gmail.com>",
-  "main": "index.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -13,12 +14,17 @@
     "lib"
   ],
   "scripts": {
-    "test": "node ./__tests__/@cosmetic-services/types.test.js"
+    "test": "node ./__tests__/@cosmetic-services/types.test.js",
+    "build": "tsc"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "@types/node": "^22.19.7",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
   }
 }
