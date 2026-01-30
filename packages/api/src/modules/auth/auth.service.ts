@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { TokenService } from '../token/token.service';
 import { UserService } from '../user/user.service';
-import { hash, compare } from 'bcrypt';
 import { AuthDto } from './dto/auth.dto';
 import { FastifyReply } from 'fastify';
+import { hash, compare } from 'bcrypt';
 
 @Injectable()
 export class AuthService {
