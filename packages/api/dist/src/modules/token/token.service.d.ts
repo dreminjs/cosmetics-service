@@ -17,8 +17,8 @@ export declare class TokenService {
     findOne(where: Prisma.RefreshTokenWhereInput): Promise<RefreshToken | null>;
     deleteRefreshToken(where: Prisma.RefreshTokenWhereUniqueInput): Promise<{
         id: string;
-        userId: string;
         token: string;
+        userId: string;
     }>;
     private buildTokensResponse;
 }

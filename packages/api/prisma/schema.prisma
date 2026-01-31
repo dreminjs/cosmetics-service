@@ -31,10 +31,10 @@ model Service {
 }
 
 model Master {
-  id                        String               @id @default(uuid())
-  name                  String
-  description          String
-  previewImage     String
+  id                         String               @id @default(uuid())
+  name                   String
+  description           String
+  previewImage      String
   timeSlots             TimeSlot[]
   booking              Booking[]
   masterServices    MasterService[]

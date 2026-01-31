@@ -12,7 +12,7 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client"
-import type * as Prisma from "./prismaNamespace.js"
+import type * as Prisma from "./prismaNamespace"
 
 
 const config: runtime.GetPrismaClientConfig = {
@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id             String        @id @default(uuid())\n  name           String\n  hashedPassword String\n  refreshToken   RefreshToken?\n}\n\nmodel RefreshToken {\n  id     String @id @default(uuid())\n  token  String\n  user   User   @relation(fields: [userId], references: [id])\n  userId String @unique\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id             String        @id @default(uuid())\n  name           String\n  hashedPassword String\n  refreshToken   RefreshToken?\n}\n\nmodel RefreshToken {\n  id     String @id @default(uuid())\n  token  String\n  user   User   @relation(fields: [userId], references: [id])\n  userId String @unique\n}\n\nmodel Service {\n  id             String          @id @default(uuid())\n  title          String\n  price          Float\n  previewImage   String\n  masterServices MasterService[]\n}\n\nmodel Master {\n  id             String          @id @default(uuid())\n  name           String\n  description    String\n  previewImage   String\n  timeSlots      TimeSlot[]\n  booking        Booking[]\n  masterServices MasterService[]\n}\n\nmodel MasterService {\n  id        String   @id @default(uuid())\n  masterId  String\n  serviceId String\n  master    Master   @relation(fields: [masterId], references: [id], onDelete: Cascade)\n  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)\n  createdAt DateTime @default(now())\n\n  @@unique([masterId, serviceId])\n  @@index([masterId, serviceId])\n}\n\nmodel TimeSlot {\n  id        String   @id @default(uuid())\n  date      DateTime\n  startTime String\n  endTime   String\n  masterId  String\n  master    Master   @relation(fields: [masterId], references: [id], onDelete: Cascade)\n  booking   Booking?\n\n  @@unique([masterId, date, startTime, endTime])\n  @@index([date, startTime, endTime])\n}\n\nmodel Booking {\n  id        String   @id @default(uuid())\n  startTime DateTime\n  endTime   DateTime\n\n  timeSlot   TimeSlot @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)\n  timeSlotId String   @unique\n  masterId   String\n  master     Master   @relation(fields: [masterId], references: [id], onDelete: Cascade)\n\n  @@index([startTime, endTime])\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hashedPassword\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refreshToken\",\"kind\":\"object\",\"type\":\"RefreshToken\",\"relationName\":\"RefreshTokenToUser\"}],\"dbName\":null},\"RefreshToken\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RefreshTokenToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hashedPassword\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refreshToken\",\"kind\":\"object\",\"type\":\"RefreshToken\",\"relationName\":\"RefreshTokenToUser\"}],\"dbName\":null},\"RefreshToken\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RefreshTokenToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Service\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"previewImage\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"masterServices\",\"kind\":\"object\",\"type\":\"MasterService\",\"relationName\":\"MasterServiceToService\"}],\"dbName\":null},\"Master\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"previewImage\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timeSlots\",\"kind\":\"object\",\"type\":\"TimeSlot\",\"relationName\":\"MasterToTimeSlot\"},{\"name\":\"booking\",\"kind\":\"object\",\"type\":\"Booking\",\"relationName\":\"BookingToMaster\"},{\"name\":\"masterServices\",\"kind\":\"object\",\"type\":\"MasterService\",\"relationName\":\"MasterToMasterService\"}],\"dbName\":null},\"MasterService\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"masterId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"master\",\"kind\":\"object\",\"type\":\"Master\",\"relationName\":\"MasterToMasterService\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"MasterServiceToService\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TimeSlot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"masterId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"master\",\"kind\":\"object\",\"type\":\"Master\",\"relationName\":\"MasterToTimeSlot\"},{\"name\":\"booking\",\"kind\":\"object\",\"type\":\"Booking\",\"relationName\":\"BookingToTimeSlot\"}],\"dbName\":null},\"Booking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"timeSlot\",\"kind\":\"object\",\"type\":\"TimeSlot\",\"relationName\":\"BookingToTimeSlot\"},{\"name\":\"timeSlotId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"masterId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"master\",\"kind\":\"object\",\"type\":\"Master\",\"relationName\":\"BookingToMaster\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -37,10 +37,10 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.js"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.js")
     return await decodeBase64AsWasm(wasm)
   },
 
@@ -195,6 +195,56 @@ export interface PrismaClient<
     * ```
     */
   get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.service`: Exposes CRUD operations for the **Service** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Services
+    * const services = await prisma.service.findMany()
+    * ```
+    */
+  get service(): Prisma.ServiceDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.master`: Exposes CRUD operations for the **Master** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Masters
+    * const masters = await prisma.master.findMany()
+    * ```
+    */
+  get master(): Prisma.MasterDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.masterService`: Exposes CRUD operations for the **MasterService** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MasterServices
+    * const masterServices = await prisma.masterService.findMany()
+    * ```
+    */
+  get masterService(): Prisma.MasterServiceDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.timeSlot`: Exposes CRUD operations for the **TimeSlot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TimeSlots
+    * const timeSlots = await prisma.timeSlot.findMany()
+    * ```
+    */
+  get timeSlot(): Prisma.TimeSlotDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.booking`: Exposes CRUD operations for the **Booking** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Bookings
+    * const bookings = await prisma.booking.findMany()
+    * ```
+    */
+  get booking(): Prisma.BookingDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

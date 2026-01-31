@@ -27,4 +27,8 @@ export class MinioService {
 
     return `${fileName}${ext}`;
   }
+
+  public async delete(file: string): Promise<void> {
+    await this.client.removeObject(this.bucket, file);
+  }
 }
