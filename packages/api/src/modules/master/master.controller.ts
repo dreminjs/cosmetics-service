@@ -70,7 +70,7 @@ export class MasterController {
   async findMany(
     @Query() dto: FindManyMasterDto,
   ): Promise<IWithPagination<Master>> {
-    const masters = await this.masterService.findAll({
+    const mastersQuery = this.masterService.findMany({
       where: {
         ...(dto.serviceId
           ? { masterServices: { some: { serviceId: dto.serviceId } } }
@@ -78,13 +78,15 @@ export class MasterController {
       },
     });
 
-    const count = await this.masterService.count({
+    const countQuery = this.masterService.count({
       where: {
         ...(dto.serviceId
           ? { masterServices: { some: { serviceId: dto.serviceId } } }
           : {}),
       },
     });
+
+    const [masters, count] = await Promise.all([mastersQuery, countQuery]);
 
     return { items: masters, total: count };
   }

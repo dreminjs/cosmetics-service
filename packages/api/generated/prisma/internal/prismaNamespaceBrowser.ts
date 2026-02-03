@@ -97,7 +97,9 @@ export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[k
 export const ServiceScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  description: 'description',
   price: 'price',
+  duration: 'duration',
   previewImage: 'previewImage'
 } as const
 
@@ -137,8 +139,7 @@ export type TimeSlotScalarFieldEnum = (typeof TimeSlotScalarFieldEnum)[keyof typ
 
 export const BookingScalarFieldEnum = {
   id: 'id',
-  startTime: 'startTime',
-  endTime: 'endTime',
+  userId: 'userId',
   timeSlotId: 'timeSlotId',
   masterId: 'masterId'
 } as const

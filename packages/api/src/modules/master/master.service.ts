@@ -12,7 +12,7 @@ export class MasterService {
     });
   }
 
-  async findAll(args: Prisma.MasterFindManyArgs): Promise<Master[]> {
+  async findMany(args: Prisma.MasterFindManyArgs): Promise<Master[]> {
     return await this.prisma.master.findMany(args);
   }
 
@@ -31,5 +31,11 @@ export class MasterService {
 
   async count(args: Prisma.MasterCountArgs): Promise<number> {
     return await this.prisma.master.count(args);
+  }
+
+  async findOneById(id: string): Promise<Master | null> {
+    return await this.prisma.master.findUnique({
+      where: { id },
+    });
   }
 }

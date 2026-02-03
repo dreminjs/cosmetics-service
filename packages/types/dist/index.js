@@ -20,3 +20,7 @@ __exportStar(require("./schemas/api.schema"), exports);
 __exportStar(require("./schemas/auth.schema"), exports);
 __exportStar(require("./types/master.types"), exports);
 __exportStar(require("./schemas/master.schema"), exports);
+__exportStar(require("./types/service.types"), exports);
+__exportStar(require("./schemas/service.schema"), exports);
+__exportStar(require("./schemas/booking.schema"), exports);
+__exportStar(require("./types/booking.types"), exports);
