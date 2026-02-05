@@ -5,7 +5,6 @@ export const LoginPage = () => {
   const { mutate } = useLogin();
 
   const handleSubmit = (dto: AuthDto) => {
-    console.log(dto);
     mutate(dto);
   };
 

@@ -3,15 +3,15 @@
   "private": true,
   "scripts": {
     "api:dev": "lerna run dev --scope=api",
-    "api:build": "lerna run build --scope=@cosmetic-services/api",
-    "api:test": "lerna run test --scope=@cosmetic-services/api",
-    "client:dev": "lerna run dev --scope=@cosmetic-services/client",
-    "client:build": "lerna run build --scope=@cosmetic-services/client",
-    "client:test": "lerna run test --scope=@cosmetic-services/client",
-    "admin:dev": "lerna run dev --scope=@cosmetic-services/admin",
-    "admin:build": "lerna run build --scope=@cosmetic-services/admin",
-    "admin:test": "lerna run test --scope=@cosmetic-services/admin",
-    "shared:build": "lerna run build --scope=@cosmetic-services/types"
+    "api:build": "lerna run build --scope=api",
+    "api:test": "lerna run test --scope=api",
+    "client:dev": "lerna run dev --scope=client",
+    "client:build": "lerna run build --scope=client",
+    "client:test": "lerna run test --scope=client",
+    "admin:dev": "lerna run dev --scope=admin",
+    "admin:build": "lerna run build --scope=admin",
+    "admin:test": "lerna run test --scope=admin",
+    "shared:build": "lerna run build --scope=types"
   },
   "workspaces": [
     "packages/*"

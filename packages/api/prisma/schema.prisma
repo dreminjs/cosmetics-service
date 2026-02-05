@@ -77,3 +77,9 @@ model Booking {
   masterId                String
   master                   Master      @relation(fields: [masterId], references: [id], onDelete: Cascade)
 }
+
+
+enum Role {
+OWNER
+CUSTOMER
+}

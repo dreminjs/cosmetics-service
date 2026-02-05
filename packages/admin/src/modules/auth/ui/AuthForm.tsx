@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthDtoSchema, type AuthDto } from "@tutor-ai/shared-types";
 import { AuthFormField } from "./AuthFormField";
+import { AuthDtoSchema, type AuthDto } from "@cosmetic-services/types";
 import type { FC } from "react";
 
 interface IProps {
