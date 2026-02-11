@@ -10,13 +10,15 @@ exports.MasterModule = void 0;
 const common_1 = require("@nestjs/common");
 const master_controller_1 = require("./master.controller");
 const master_service_1 = require("./master.service");
+const minio_module_1 = require("../minio/minio.module");
 let MasterModule = class MasterModule {
 };
 exports.MasterModule = MasterModule;
 exports.MasterModule = MasterModule = __decorate([
     (0, common_1.Module)({
+        imports: [minio_module_1.MinioModule],
         controllers: [master_controller_1.MasterController],
-        providers: [master_service_1.MasterService]
+        providers: [master_service_1.MasterService],
     })
 ], MasterModule);
 //# sourceMappingURL=master.module.js.map

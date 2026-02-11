@@ -1,5 +1,5 @@
 {
-  "name": "@cosmetic-services/types",
+  "name": "types",
   "version": "0.0.0",
   "homepage": "",
   "main": "dist/index.js",

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.QueryMode = exports.SortOrder = exports.RefreshTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.QueryMode = exports.SortOrder = exports.UserRoleScalarFieldEnum = exports.BookingScalarFieldEnum = exports.TimeSlotScalarFieldEnum = exports.MasterServiceScalarFieldEnum = exports.MasterScalarFieldEnum = exports.ServiceScalarFieldEnum = exports.RefreshTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -61,7 +61,13 @@ exports.JsonNull = runtime.JsonNull;
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     User: 'User',
-    RefreshToken: 'RefreshToken'
+    RefreshToken: 'RefreshToken',
+    Service: 'Service',
+    Master: 'Master',
+    MasterService: 'MasterService',
+    TimeSlot: 'TimeSlot',
+    Booking: 'Booking',
+    UserRole: 'UserRole'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -72,11 +78,50 @@ exports.TransactionIsolationLevel = runtime.makeStrictEnum({
 exports.UserScalarFieldEnum = {
     id: 'id',
     name: 'name',
+    phone: 'phone',
     hashedPassword: 'hashedPassword'
 };
 exports.RefreshTokenScalarFieldEnum = {
     id: 'id',
     token: 'token',
+    userId: 'userId'
+};
+exports.ServiceScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    price: 'price',
+    duration: 'duration',
+    previewImage: 'previewImage'
+};
+exports.MasterScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    previewImage: 'previewImage'
+};
+exports.MasterServiceScalarFieldEnum = {
+    id: 'id',
+    masterId: 'masterId',
+    serviceId: 'serviceId',
+    createdAt: 'createdAt'
+};
+exports.TimeSlotScalarFieldEnum = {
+    id: 'id',
+    date: 'date',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    masterId: 'masterId'
+};
+exports.BookingScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    timeSlotId: 'timeSlotId',
+    masterId: 'masterId'
+};
+exports.UserRoleScalarFieldEnum = {
+    id: 'id',
+    role: 'role',
     userId: 'userId'
 };
 exports.SortOrder = {

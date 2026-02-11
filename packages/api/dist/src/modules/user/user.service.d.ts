@@ -5,4 +5,5 @@ export declare class UserService {
     constructor(prisma: PrismaService);
     findOne(args: Prisma.UserFindFirstArgs): Promise<User | null>;
     createOne(dto: Prisma.UserCreateInput): Promise<User>;
+    updateOne(id: string, dto: Prisma.UserUpdateInput): Promise<User | null>;
 }

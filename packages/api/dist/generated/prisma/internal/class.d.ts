@@ -1,5 +1,5 @@
 import * as runtime from "@prisma/client/runtime/client";
-import type * as Prisma from "./prismaNamespace.js";
+import type * as Prisma from "./prismaNamespace";
 export type LogOptions<ClientOptions extends Prisma.PrismaClientOptions> = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never;
 export interface PrismaClientConstructor {
     new <Options extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions, LogOpts extends LogOptions<Options> = LogOptions<Options>, OmitOpts extends Prisma.PrismaClientOptions['omit'] = Options extends {
@@ -32,6 +32,24 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get service(): Prisma.ServiceDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get master(): Prisma.MasterDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get masterService(): Prisma.MasterServiceDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get timeSlot(): Prisma.TimeSlotDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get booking(): Prisma.BookingDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get userRole(): Prisma.UserRoleDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
 }

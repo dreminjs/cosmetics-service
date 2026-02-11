@@ -1,5 +1,5 @@
 import type * as runtime from "@prisma/client/runtime/client";
-import type * as Prisma from "../internal/prismaNamespace.js";
+import type * as Prisma from "../internal/prismaNamespace";
 export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayload>;
 export type AggregateUser = {
     _count: UserCountAggregateOutputType | null;
@@ -9,32 +9,38 @@ export type AggregateUser = {
 export type UserMinAggregateOutputType = {
     id: string | null;
     name: string | null;
+    phone: string | null;
     hashedPassword: string | null;
 };
 export type UserMaxAggregateOutputType = {
     id: string | null;
     name: string | null;
+    phone: string | null;
     hashedPassword: string | null;
 };
 export type UserCountAggregateOutputType = {
     id: number;
     name: number;
+    phone: number;
     hashedPassword: number;
     _all: number;
 };
 export type UserMinAggregateInputType = {
     id?: true;
     name?: true;
+    phone?: true;
     hashedPassword?: true;
 };
 export type UserMaxAggregateInputType = {
     id?: true;
     name?: true;
+    phone?: true;
     hashedPassword?: true;
 };
 export type UserCountAggregateInputType = {
     id?: true;
     name?: true;
+    phone?: true;
     hashedPassword?: true;
     _all?: true;
 };
@@ -65,6 +71,7 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
     id: string;
     name: string;
+    phone: string;
     hashedPassword: string;
     _count: UserCountAggregateOutputType | null;
     _min: UserMinAggregateOutputType | null;
@@ -79,27 +86,37 @@ export type UserWhereInput = {
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     id?: Prisma.StringFilter<"User"> | string;
     name?: Prisma.StringFilter<"User"> | string;
+    phone?: Prisma.StringFilter<"User"> | string;
     hashedPassword?: Prisma.StringFilter<"User"> | string;
     refreshToken?: Prisma.XOR<Prisma.RefreshTokenNullableScalarRelationFilter, Prisma.RefreshTokenWhereInput> | null;
+    booking?: Prisma.BookingListRelationFilter;
+    role?: Prisma.UserRoleListRelationFilter;
 };
 export type UserOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    phone?: Prisma.SortOrder;
     hashedPassword?: Prisma.SortOrder;
     refreshToken?: Prisma.RefreshTokenOrderByWithRelationInput;
+    booking?: Prisma.BookingOrderByRelationAggregateInput;
+    role?: Prisma.UserRoleOrderByRelationAggregateInput;
 };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string;
+    phone?: string;
     AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     OR?: Prisma.UserWhereInput[];
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     name?: Prisma.StringFilter<"User"> | string;
     hashedPassword?: Prisma.StringFilter<"User"> | string;
     refreshToken?: Prisma.XOR<Prisma.RefreshTokenNullableScalarRelationFilter, Prisma.RefreshTokenWhereInput> | null;
-}, "id">;
+    booking?: Prisma.BookingListRelationFilter;
+    role?: Prisma.UserRoleListRelationFilter;
+}, "id" | "phone">;
 export type UserOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    phone?: Prisma.SortOrder;
     hashedPassword?: Prisma.SortOrder;
     _count?: Prisma.UserCountOrderByAggregateInput;
     _max?: Prisma.UserMaxOrderByAggregateInput;
@@ -111,60 +128,79 @@ export type UserScalarWhereWithAggregatesInput = {
     NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[];
     id?: Prisma.StringWithAggregatesFilter<"User"> | string;
     name?: Prisma.StringWithAggregatesFilter<"User"> | string;
+    phone?: Prisma.StringWithAggregatesFilter<"User"> | string;
     hashedPassword?: Prisma.StringWithAggregatesFilter<"User"> | string;
 };
 export type UserCreateInput = {
     id?: string;
     name: string;
+    phone: string;
     hashedPassword: string;
     refreshToken?: Prisma.RefreshTokenCreateNestedOneWithoutUserInput;
+    booking?: Prisma.BookingCreateNestedManyWithoutUserInput;
+    role?: Prisma.UserRoleCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateInput = {
     id?: string;
     name: string;
+    phone: string;
     hashedPassword: string;
     refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedOneWithoutUserInput;
+    booking?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput;
+    role?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
     hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
     refreshToken?: Prisma.RefreshTokenUpdateOneWithoutUserNestedInput;
+    booking?: Prisma.BookingUpdateManyWithoutUserNestedInput;
+    role?: Prisma.UserRoleUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
     hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
     refreshToken?: Prisma.RefreshTokenUncheckedUpdateOneWithoutUserNestedInput;
+    booking?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput;
+    role?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateManyInput = {
     id?: string;
     name: string;
+    phone: string;
     hashedPassword: string;
 };
 export type UserUpdateManyMutationInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
     hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 export type UserUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
     hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 export type UserCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    phone?: Prisma.SortOrder;
     hashedPassword?: Prisma.SortOrder;
 };
 export type UserMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    phone?: Prisma.SortOrder;
     hashedPassword?: Prisma.SortOrder;
 };
 export type UserMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    phone?: Prisma.SortOrder;
     hashedPassword?: Prisma.SortOrder;
 };
 export type UserScalarRelationFilter = {
@@ -186,15 +222,45 @@ export type UserUpdateOneRequiredWithoutRefreshTokenNestedInput = {
     connect?: Prisma.UserWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefreshTokenInput, Prisma.UserUpdateWithoutRefreshTokenInput>, Prisma.UserUncheckedUpdateWithoutRefreshTokenInput>;
 };
+export type UserCreateNestedOneWithoutBookingInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutBookingInput, Prisma.UserUncheckedCreateWithoutBookingInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookingInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutBookingNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutBookingInput, Prisma.UserUncheckedCreateWithoutBookingInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookingInput;
+    upsert?: Prisma.UserUpsertWithoutBookingInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBookingInput, Prisma.UserUpdateWithoutBookingInput>, Prisma.UserUncheckedUpdateWithoutBookingInput>;
+};
+export type UserCreateNestedOneWithoutRoleInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutRoleInput, Prisma.UserUncheckedCreateWithoutRoleInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutRoleNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutRoleInput, Prisma.UserUncheckedCreateWithoutRoleInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleInput;
+    upsert?: Prisma.UserUpsertWithoutRoleInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoleInput, Prisma.UserUpdateWithoutRoleInput>, Prisma.UserUncheckedUpdateWithoutRoleInput>;
+};
 export type UserCreateWithoutRefreshTokenInput = {
     id?: string;
     name: string;
+    phone: string;
     hashedPassword: string;
+    booking?: Prisma.BookingCreateNestedManyWithoutUserInput;
+    role?: Prisma.UserRoleCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutRefreshTokenInput = {
     id?: string;
     name: string;
+    phone: string;
     hashedPassword: string;
+    booking?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput;
+    role?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutRefreshTokenInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -212,37 +278,160 @@ export type UserUpdateToOneWithWhereWithoutRefreshTokenInput = {
 export type UserUpdateWithoutRefreshTokenInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
     hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
+    booking?: Prisma.BookingUpdateManyWithoutUserNestedInput;
+    role?: Prisma.UserRoleUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutRefreshTokenInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
     hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
+    booking?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput;
+    role?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutBookingInput = {
+    id?: string;
+    name: string;
+    phone: string;
+    hashedPassword: string;
+    refreshToken?: Prisma.RefreshTokenCreateNestedOneWithoutUserInput;
+    role?: Prisma.UserRoleCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutBookingInput = {
+    id?: string;
+    name: string;
+    phone: string;
+    hashedPassword: string;
+    refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedOneWithoutUserInput;
+    role?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutBookingInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutBookingInput, Prisma.UserUncheckedCreateWithoutBookingInput>;
+};
+export type UserUpsertWithoutBookingInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutBookingInput, Prisma.UserUncheckedUpdateWithoutBookingInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutBookingInput, Prisma.UserUncheckedCreateWithoutBookingInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutBookingInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutBookingInput, Prisma.UserUncheckedUpdateWithoutBookingInput>;
+};
+export type UserUpdateWithoutBookingInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
+    hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
+    refreshToken?: Prisma.RefreshTokenUpdateOneWithoutUserNestedInput;
+    role?: Prisma.UserRoleUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutBookingInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
+    hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
+    refreshToken?: Prisma.RefreshTokenUncheckedUpdateOneWithoutUserNestedInput;
+    role?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutRoleInput = {
+    id?: string;
+    name: string;
+    phone: string;
+    hashedPassword: string;
+    refreshToken?: Prisma.RefreshTokenCreateNestedOneWithoutUserInput;
+    booking?: Prisma.BookingCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutRoleInput = {
+    id?: string;
+    name: string;
+    phone: string;
+    hashedPassword: string;
+    refreshToken?: Prisma.RefreshTokenUncheckedCreateNestedOneWithoutUserInput;
+    booking?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutRoleInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutRoleInput, Prisma.UserUncheckedCreateWithoutRoleInput>;
+};
+export type UserUpsertWithoutRoleInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutRoleInput, Prisma.UserUncheckedUpdateWithoutRoleInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutRoleInput, Prisma.UserUncheckedCreateWithoutRoleInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutRoleInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutRoleInput, Prisma.UserUncheckedUpdateWithoutRoleInput>;
+};
+export type UserUpdateWithoutRoleInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
+    hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
+    refreshToken?: Prisma.RefreshTokenUpdateOneWithoutUserNestedInput;
+    booking?: Prisma.BookingUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutRoleInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    phone?: Prisma.StringFieldUpdateOperationsInput | string;
+    hashedPassword?: Prisma.StringFieldUpdateOperationsInput | string;
+    refreshToken?: Prisma.RefreshTokenUncheckedUpdateOneWithoutUserNestedInput;
+    booking?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCountOutputType = {
+    booking: number;
+    role: number;
+};
+export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    booking?: boolean | UserCountOutputTypeCountBookingArgs;
+    role?: boolean | UserCountOutputTypeCountRoleArgs;
+};
+export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null;
+};
+export type UserCountOutputTypeCountBookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.BookingWhereInput;
+};
+export type UserCountOutputTypeCountRoleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.UserRoleWhereInput;
 };
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     name?: boolean;
+    phone?: boolean;
     hashedPassword?: boolean;
     refreshToken?: boolean | Prisma.User$refreshTokenArgs<ExtArgs>;
+    booking?: boolean | Prisma.User$bookingArgs<ExtArgs>;
+    role?: boolean | Prisma.User$roleArgs<ExtArgs>;
+    _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     name?: boolean;
+    phone?: boolean;
     hashedPassword?: boolean;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     name?: boolean;
+    phone?: boolean;
     hashedPassword?: boolean;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectScalar = {
     id?: boolean;
     name?: boolean;
+    phone?: boolean;
     hashedPassword?: boolean;
 };
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "hashedPassword", ExtArgs["result"]["user"]>;
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "hashedPassword", ExtArgs["result"]["user"]>;
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     refreshToken?: boolean | Prisma.User$refreshTokenArgs<ExtArgs>;
+    booking?: boolean | Prisma.User$bookingArgs<ExtArgs>;
+    role?: boolean | Prisma.User$roleArgs<ExtArgs>;
+    _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -250,10 +439,13 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: "User";
     objects: {
         refreshToken: Prisma.$RefreshTokenPayload<ExtArgs> | null;
+        booking: Prisma.$BookingPayload<ExtArgs>[];
+        role: Prisma.$UserRolePayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
         name: string;
+        phone: string;
         hashedPassword: string;
     }, ExtArgs["result"]["user"]>;
     composites: {};
@@ -308,6 +500,8 @@ export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     refreshToken<T extends Prisma.User$refreshTokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokenArgs<ExtArgs>>): Prisma.Prisma__RefreshTokenClient<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    booking<T extends Prisma.User$bookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bookingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    role<T extends Prisma.User$roleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roleArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
     catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
     finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
@@ -315,6 +509,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
     readonly id: Prisma.FieldRef<"User", 'String'>;
     readonly name: Prisma.FieldRef<"User", 'String'>;
+    readonly phone: Prisma.FieldRef<"User", 'String'>;
     readonly hashedPassword: Prisma.FieldRef<"User", 'String'>;
 }
 export type UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -420,6 +615,28 @@ export type User$refreshTokenArgs<ExtArgs extends runtime.Types.Extensions.Inter
     omit?: Prisma.RefreshTokenOmit<ExtArgs> | null;
     include?: Prisma.RefreshTokenInclude<ExtArgs> | null;
     where?: Prisma.RefreshTokenWhereInput;
+};
+export type User$bookingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    select?: Prisma.BookingSelect<ExtArgs> | null;
+    omit?: Prisma.BookingOmit<ExtArgs> | null;
+    include?: Prisma.BookingInclude<ExtArgs> | null;
+    where?: Prisma.BookingWhereInput;
+    orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[];
+    cursor?: Prisma.BookingWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[];
+};
+export type User$roleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    select?: Prisma.UserRoleSelect<ExtArgs> | null;
+    omit?: Prisma.UserRoleOmit<ExtArgs> | null;
+    include?: Prisma.UserRoleInclude<ExtArgs> | null;
+    where?: Prisma.UserRoleWhereInput;
+    orderBy?: Prisma.UserRoleOrderByWithRelationInput | Prisma.UserRoleOrderByWithRelationInput[];
+    cursor?: Prisma.UserRoleWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.UserRoleScalarFieldEnum | Prisma.UserRoleScalarFieldEnum[];
 };
 export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     select?: Prisma.UserSelect<ExtArgs> | null;

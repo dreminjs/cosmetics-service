@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AuthModule } from '../auth/auth.module';
+import { AuthModule } from '../auth';
 import { MasterModule } from '../master/master.module';
 import { ServiceModule } from '../service/service.module';
 import { TokenModule } from '../token/token.module';
 import { MinioModule } from '../minio/minio.module';
 import { UserModule } from '../user/user.module';
+import { UserRoleModule } from '../user-role';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserModule } from '../user/user.module';
     TokenModule,
     MinioModule,
     UserModule,
+    UserRoleModule,
   ],
   controllers: [AppController],
 })

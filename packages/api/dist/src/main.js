@@ -12,6 +12,7 @@ const response_interceptor_1 = require("./interceptors/response.interceptor");
 const cookie_1 = __importDefault(require("@fastify/cookie"));
 const multipart_1 = __importDefault(require("@fastify/multipart"));
 const platform_fastify_1 = require("@nestjs/platform-fastify");
+const common_1 = require("@nestjs/common");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_1.AppModule, new platform_fastify_1.FastifyAdapter());
     await app.register(cookie_1.default);
@@ -20,6 +21,9 @@ async function bootstrap() {
     });
     app.enableCors({ origin: 'http://localhost:5173', credentials: true });
     app.useGlobalPipes(new nestjs_zod_1.ZodValidationPipe());
+    app.useGlobalPipes(new common_1.ValidationPipe({
+        transform: true,
+    }));
     app.useGlobalInterceptors(new response_interceptor_1.ResponseInterceptor());
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Tutor AI')

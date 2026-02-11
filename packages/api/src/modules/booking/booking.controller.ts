@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseUUIDPipe,
   Post,
@@ -66,6 +68,7 @@ export class BookingController {
     });
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   public async deleteOne(
     @Param('id', ParseUUIDPipe) id: string,

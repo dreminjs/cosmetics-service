@@ -17,10 +17,16 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const user_decorator_1 = require("./user.decorator");
 const access_token_guard_1 = require("../token/guards/access-token.guard");
+const client_1 = require("../../../generated/prisma/client");
+const user_role_1 = require("../user-role");
+const roles_decorator_1 = require("../user-role/roles.decorator");
+const update_dto_1 = require("./dto/update.dto");
 let UserController = class UserController {
     userService;
-    constructor(userService) {
+    userRoleService;
+    constructor(userService, userRoleService) {
         this.userService = userService;
+        this.userRoleService = userRoleService;
     }
     async findMe(id) {
         return await this.userService.findOne({
@@ -28,6 +34,9 @@ let UserController = class UserController {
                 id,
             },
         });
+    }
+    async updateUserRole(userId, dto) {
+        return await this.userRoleService.createOne(userId, dto.role);
     }
 };
 exports.UserController = UserController;
@@ -39,8 +48,18 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findMe", null);
+__decorate([
+    (0, roles_decorator_1.AllowedRoles)(client_1.Role.OWNER),
+    (0, common_1.Patch)('/:userId/role'),
+    __param(0, (0, common_1.Param)('userId', common_1.ParseUUIDPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_dto_1.AssignUserRoleDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateUserRole", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        user_role_1.UserRoleService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map

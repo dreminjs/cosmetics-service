@@ -24,3 +24,7 @@ __exportStar(require("./types/service.types"), exports);
 __exportStar(require("./schemas/service.schema"), exports);
 __exportStar(require("./schemas/booking.schema"), exports);
 __exportStar(require("./types/booking.types"), exports);
+__exportStar(require("./types/user.types"), exports);
+__exportStar(require("./schemas/user.schema"), exports);
+__exportStar(require("./types/time-slot.types"), exports);
+__exportStar(require("./schemas/time-slot.schema"), exports);

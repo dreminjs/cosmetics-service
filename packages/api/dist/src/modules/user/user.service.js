@@ -25,6 +25,14 @@ let UserService = class UserService {
             data: { ...dto },
         });
     }
+    async updateOne(id, dto) {
+        return await this.prisma.user.update({
+            where: {
+                id,
+            },
+            data: { ...dto },
+        });
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

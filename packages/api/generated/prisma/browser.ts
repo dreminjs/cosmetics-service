@@ -52,3 +52,8 @@ export type TimeSlot = Prisma.TimeSlotModel
  * 
  */
 export type Booking = Prisma.BookingModel
+/**
+ * Model UserRole
+ * 
+ */
+export type UserRole = Prisma.UserRoleModel

@@ -8,4 +8,8 @@ export * from "./types/service.types";
 export * from "./schemas/service.schema";
 export * from "./schemas/booking.schema";
 export * from "./types/booking.types";
+export * from "./types/user.types";
+export * from "./schemas/user.schema";
+export * from "./types/time-slot.types";
+export * from "./schemas/time-slot.schema";
 //# sourceMappingURL=index.d.ts.map

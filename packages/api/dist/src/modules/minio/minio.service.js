@@ -26,6 +26,9 @@ let MinioService = MinioService_1 = class MinioService {
         await this.client.putObject(this.bucket, `${fileName}${ext}`, file.buffer);
         return `${fileName}${ext}`;
     }
+    async delete(file) {
+        await this.client.removeObject(this.bucket, file);
+    }
 };
 exports.MinioService = MinioService;
 exports.MinioService = MinioService = MinioService_1 = __decorate([

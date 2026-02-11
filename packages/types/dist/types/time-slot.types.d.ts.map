@@ -1,0 +1,1 @@
+{"version":3,"file":"time-slot.types.d.ts","sourceRoot":"","sources":["../../src/types/time-slot.types.ts"],"names":[],"mappings":"AAAA,OAAO,CAAC,MAAM,KAAK,CAAC;AACpB,OAAO,EACL,oBAAoB,EACpB,uBAAuB,EACxB,MAAM,6BAA6B,CAAC;AAErC,MAAM,MAAM,eAAe,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,oBAAoB,CAAC,CAAC;AAEnE,MAAM,MAAM,eAAe,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,uBAAuB,CAAC,CAAC"}

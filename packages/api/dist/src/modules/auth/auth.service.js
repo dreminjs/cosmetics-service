@@ -42,7 +42,7 @@ let AuthService = class AuthService {
         }
         const isPasswordValid = await (0, bcrypt_1.compare)(dto.password, user?.hashedPassword);
         if (!isPasswordValid) {
-            throw new Error('Invalid password');
+            throw new common_1.HttpException('Invalid password', common_1.HttpStatus.CONFLICT);
         }
         return this.tokenService.generateTokens({
             userId: user?.id,

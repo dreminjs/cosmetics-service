@@ -8,6 +8,7 @@ exports.AuthDtoSchema = zod_1.z.object({
         .min(3, { message: "Nickname must be at least 3 characters long" })
         .max(100, { message: "Nickname must be at most 100 characters long" })
         .trim(),
+    phone: zod_1.z.string().min(10).max(15).regex(/^\d+$/),
     password: zod_1.z
         .string()
         .min(3, { message: "Password must be at least 3 characters long" })

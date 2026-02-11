@@ -10,9 +10,11 @@ datasource db {
 model User {
   id                         String        @id @default(uuid())
   name                   String
+  phone                  String         @unique
   hashedPassword String
   refreshToken       RefreshToken?
-  booking              Booking[]
+  booking               Booking[]
+  role                      UserRole[]
 }
 
 model RefreshToken {
@@ -78,8 +80,17 @@ model Booking {
   master                   Master      @relation(fields: [masterId], references: [id], onDelete: Cascade)
 }
 
+model UserRole {
+  id                          String        @id @default(uuid())
+  role                       Role
+  userId                   String
+  user                      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, role])
+}
 
 enum Role {
-OWNER
-CUSTOMER
+    OWNER
+    CUSTOMER
+    MASTER
 }

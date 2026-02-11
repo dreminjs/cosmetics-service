@@ -1,6 +1,12 @@
-import * as Prisma from './internal/prismaNamespaceBrowser.js';
+import * as Prisma from './internal/prismaNamespaceBrowser';
 export { Prisma };
-export * as $Enums from './enums.js';
-export * from './enums.js';
+export * as $Enums from './enums';
+export * from './enums';
 export type User = Prisma.UserModel;
 export type RefreshToken = Prisma.RefreshTokenModel;
+export type Service = Prisma.ServiceModel;
+export type Master = Prisma.MasterModel;
+export type MasterService = Prisma.MasterServiceModel;
+export type TimeSlot = Prisma.TimeSlotModel;
+export type Booking = Prisma.BookingModel;
+export type UserRole = Prisma.UserRoleModel;

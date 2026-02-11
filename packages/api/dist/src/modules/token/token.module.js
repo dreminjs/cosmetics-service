@@ -15,12 +15,18 @@ const access_token_strategy_1 = require("./strategies/access-token.strategy");
 const refresh_token_strategy_1 = require("./strategies/refresh-token.strategy");
 const user_module_1 = require("../user/user.module");
 const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
 let TokenModule = class TokenModule {
 };
 exports.TokenModule = TokenModule;
 exports.TokenModule = TokenModule = __decorate([
     (0, common_1.Module)({
-        imports: [jwt_1.JwtModule.register({}), prisma_module_1.PrismaModule, (0, common_1.forwardRef)(() => user_module_1.UserModule)],
+        imports: [
+            jwt_1.JwtModule.register({}),
+            prisma_module_1.PrismaModule,
+            (0, common_1.forwardRef)(() => user_module_1.UserModule),
+            config_1.ConfigModule,
+        ],
         controllers: [token_controller_1.TokenController],
         providers: [token_service_1.TokenService, access_token_strategy_1.AccessTokenStrategy, refresh_token_strategy_1.RefreshTokenStrategy],
         exports: [token_service_1.TokenService, access_token_strategy_1.AccessTokenStrategy, refresh_token_strategy_1.RefreshTokenStrategy],

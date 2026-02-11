@@ -42,7 +42,7 @@ export class AuthService {
     const isPasswordValid = await compare(dto.password, user?.hashedPassword);
 
     if (!isPasswordValid) {
-      throw new Error('Invalid password');
+      throw new HttpException('Invalid password', HttpStatus.CONFLICT);
     }
 
     return this.tokenService.generateTokens(

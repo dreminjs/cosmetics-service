@@ -6,9 +6,15 @@ import { AccessTokenStrategy } from './strategies/access-token.strategy';
 import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
 import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [JwtModule.register({}), PrismaModule, forwardRef(() => UserModule)],
+  imports: [
+    JwtModule.register({}),
+    PrismaModule,
+    forwardRef(() => UserModule),
+    ConfigModule,
+  ],
   controllers: [TokenController],
   providers: [TokenService, AccessTokenStrategy, RefreshTokenStrategy],
   exports: [TokenService, AccessTokenStrategy, RefreshTokenStrategy],

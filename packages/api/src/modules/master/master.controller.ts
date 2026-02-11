@@ -17,6 +17,7 @@ import { MinioService } from '../minio/minio.service';
 import { UpdateMasterDto } from './dto/update-master.dto';
 import { FindManyMasterDto } from './dto/find-masters.dto';
 import { IWithPagination } from '@cosmetic-services/types';
+import { MasterWhereInput } from 'generated/prisma/models';
 
 @Controller('master')
 export class MasterController {
@@ -70,20 +71,18 @@ export class MasterController {
   async findMany(
     @Query() dto: FindManyMasterDto,
   ): Promise<IWithPagination<Master>> {
+    const whereOptions = {
+      ...(dto.serviceId
+        ? { masterServices: { some: { serviceId: dto.serviceId } } }
+        : {}),
+    } satisfies MasterWhereInput;
+
     const mastersQuery = this.masterService.findMany({
-      where: {
-        ...(dto.serviceId
-          ? { masterServices: { some: { serviceId: dto.serviceId } } }
-          : {}),
-      },
+      where: whereOptions,
     });
 
     const countQuery = this.masterService.count({
-      where: {
-        ...(dto.serviceId
-          ? { masterServices: { some: { serviceId: dto.serviceId } } }
-          : {}),
-      },
+      where: whereOptions,
     });
 
     const [masters, count] = await Promise.all([mastersQuery, countQuery]);
