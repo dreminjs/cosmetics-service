@@ -7,7 +7,6 @@ export const API_KEYS = {
 
 export const SERVICE_KEYS = {
   login: "login",
-  register: "register",
   logout: "logout",
   me: "me",
 } as const;

@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 const nest_commander_1 = require("nest-commander");
-const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
+const user_cli_module_1 = require("../user-cli/user-cli.module");
 async function bootstrap() {
     const logLevels = process.env.DEBUG
         ? ['log', 'error', 'warn', 'debug', 'verbose']
         : ['log', 'error', 'warn'];
     const logger = new common_1.Logger('CLI');
     try {
-        await nest_commander_1.CommandFactory.run(app_module_1.AppModule, {
+        await nest_commander_1.CommandFactory.run(user_cli_module_1.UserCliModule, {
             logger: logLevels,
             errorHandler: (err) => {
                 logger.error(err.message);

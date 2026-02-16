@@ -26,7 +26,7 @@ export class AccessTokenStrategy extends PassportStrategy(
         },
       ]),
       ignoreExpiration: false,
-      secretOrKey: process.env.ACCESS_KEY,
+      secretOrKey: configService.get('ACCESS_TOKEN'),
     });
   }
 

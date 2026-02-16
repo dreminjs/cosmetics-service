@@ -8,7 +8,6 @@ import { MinioModule } from '../minio/minio.module';
 import { UserModule } from '../user/user.module';
 import { UserRoleModule } from '../user-role';
 import { ConfigModule } from '@nestjs/config';
-import { UserCliModule } from '../user-cli/user-cli.module';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { UserCliModule } from '../user-cli/user-cli.module';
     MinioModule,
     UserModule,
     UserRoleModule,
-    UserCliModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
