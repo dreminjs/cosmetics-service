@@ -7,6 +7,8 @@ import { TokenModule } from '../token/token.module';
 import { MinioModule } from '../minio/minio.module';
 import { UserModule } from '../user/user.module';
 import { UserRoleModule } from '../user-role';
+import { ConfigModule } from '@nestjs/config';
+import { UserCliModule } from '../user-cli/user-cli.module';
 
 @Module({
   imports: [
@@ -17,6 +19,10 @@ import { UserRoleModule } from '../user-role';
     MinioModule,
     UserModule,
     UserRoleModule,
+    UserCliModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
 })

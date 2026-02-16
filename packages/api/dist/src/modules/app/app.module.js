@@ -16,6 +16,7 @@ const token_module_1 = require("../token/token.module");
 const minio_module_1 = require("../minio/minio.module");
 const user_module_1 = require("../user/user.module");
 const user_role_1 = require("../user-role");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,6 +30,9 @@ exports.AppModule = AppModule = __decorate([
             minio_module_1.MinioModule,
             user_module_1.UserModule,
             user_role_1.UserRoleModule,
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
         ],
         controllers: [app_controller_1.AppController],
     })

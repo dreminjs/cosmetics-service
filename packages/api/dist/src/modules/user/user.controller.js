@@ -29,11 +29,7 @@ let UserController = class UserController {
         this.userRoleService = userRoleService;
     }
     async findMe(id) {
-        return await this.userService.findOne({
-            where: {
-                id,
-            },
-        });
+        return await this.userService.findPublicOne(id);
     }
     async updateUserRole(userId, dto) {
         return await this.userRoleService.createOne(userId, dto.role);
@@ -42,7 +38,6 @@ let UserController = class UserController {
 exports.UserController = UserController;
 __decorate([
     (0, common_1.Get)('me'),
-    (0, common_1.UseGuards)(access_token_guard_1.AccessTokenGuard),
     __param(0, (0, user_decorator_1.CurrentUser)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -58,6 +53,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUserRole", null);
 exports.UserController = UserController = __decorate([
+    (0, common_1.UseGuards)(access_token_guard_1.AccessTokenGuard),
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [user_service_1.UserService,
         user_role_1.UserRoleService])

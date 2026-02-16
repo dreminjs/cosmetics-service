@@ -3,7 +3,7 @@ import {
   findManyMasterQueryParamsSchema,
   hireMasterFormSchema,
   updateMasterFormSchema,
-} from "../schemas/master.schema";
+} from "../schemas/master.schema.js";
 
 export type THireMasterDto = z.infer<typeof hireMasterFormSchema>;
 

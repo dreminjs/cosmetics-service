@@ -1,13 +1,9 @@
-import type { FC } from "react";
+import { Outlet } from "react-router";
 
-interface IProps {
-  children: React.ReactNode;
-}
-
-export const AuthPageLayout: FC<IProps> = ({ children }) => {
+export const AuthPageLayout = () => {
   return (
-    <div className="flex flex-col items-center justify-center  min-h-screen">
-      {children}
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <Outlet />
     </div>
   );
 };

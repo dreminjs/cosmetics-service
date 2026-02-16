@@ -6,4 +6,5 @@ const nestjs_zod_1 = require("nestjs-zod");
 class CreateMasterDto extends (0, nestjs_zod_1.createZodDto)(types_1.hireMasterFormSchema) {
 }
 exports.CreateMasterDto = CreateMasterDto;
+const dto = new CreateMasterDto();
 //# sourceMappingURL=create-master.dto.js.map

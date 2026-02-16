@@ -1,12 +1,6 @@
 import z from "zod";
-import {
-  createServiceSchema,
-  findManyServicesQueryParamsSchema,
-  updateServiceSchema,
-} from "../schemas/service.schema";
+import { findManyServicesQueryParamsSchema } from "../schemas/service.schema.js";
 
-export type TCreateService = z.infer<typeof createServiceSchema>;
-export type TUpdateService = z.infer<typeof updateServiceSchema>;
 export type TFindManyServicesQueryParams = z.infer<
   typeof findManyServicesQueryParamsSchema
 >;

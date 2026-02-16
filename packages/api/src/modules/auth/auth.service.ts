@@ -4,6 +4,7 @@ import { UserService } from '../user/user.service';
 import { AuthDto } from './dto/auth.dto';
 import { FastifyReply } from 'fastify';
 import { hash, compare } from 'bcrypt';
+import { Role } from 'generated/prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,12 @@ export class AuthService {
     const user = await this.userService.createOne({
       name: dto.name,
       hashedPassword: hashedPassword,
+      phone: dto.phone,
+      role: {
+        create: {
+          role: Role.CUSTOMER,
+        },
+      },
     });
 
     return this.tokenService.generateTokens(

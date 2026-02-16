@@ -10,13 +10,15 @@ exports.ServiceModule = void 0;
 const common_1 = require("@nestjs/common");
 const service_controller_1 = require("./service.controller");
 const service_service_1 = require("./service.service");
+const minio_1 = require("../minio");
 let ServiceModule = class ServiceModule {
 };
 exports.ServiceModule = ServiceModule;
 exports.ServiceModule = ServiceModule = __decorate([
     (0, common_1.Module)({
+        imports: [minio_1.MinioModule],
         controllers: [service_controller_1.ServiceController],
-        providers: [service_service_1.ServiceService]
+        providers: [service_service_1.ServiceService],
     })
 ], ServiceModule);
 //# sourceMappingURL=service.module.js.map

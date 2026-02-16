@@ -1,15 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateOneTimeSlotSchema = exports.createTimeSlotSchema = void 0;
-const zod_1 = __importDefault(require("zod"));
-exports.createTimeSlotSchema = zod_1.default.object({
-    id: zod_1.default.string().uuid(),
-    date: zod_1.default.date(),
-    startTime: zod_1.default.string(),
-    endTime: zod_1.default.string(),
-    masterId: zod_1.default.string().uuid(),
+import z from "zod";
+export const createTimeSlotSchema = z.object({
+    id: z.string().uuid(),
+    date: z.date(),
+    startTime: z.string(),
+    endTime: z.string(),
+    masterId: z.string().uuid(),
 });
-exports.updateOneTimeSlotSchema = exports.createTimeSlotSchema.partial();
+export const updateOneTimeSlotSchema = createTimeSlotSchema.partial();
+export const findManyTimeSlotSchema = z.object({
+    startDate: z.date().min(new Date()).optional(),
+    endDate: z.date().min(new Date()).optional(),
+    masterId: z.string().uuid().optional(),
+});

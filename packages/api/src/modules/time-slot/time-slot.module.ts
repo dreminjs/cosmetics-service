@@ -4,6 +4,6 @@ import { TimeSlotService } from './time-slot.service';
 
 @Module({
   controllers: [TimeSlotController],
-  providers: [TimeSlotService]
+  providers: [TimeSlotService],
 })
 export class TimeSlotModule {}

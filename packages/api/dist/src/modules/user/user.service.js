@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const types_1 = require("@cosmetic-services/types");
 let UserService = class UserService {
     prisma;
     constructor(prisma) {
@@ -19,6 +20,19 @@ let UserService = class UserService {
     }
     async findOne(args) {
         return await this.prisma.user.findFirst(args);
+    }
+    async findPublicOne(id) {
+        const findedUser = await this.prisma.user.findFirst({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+                name: true,
+                phone: true,
+            },
+        });
+        return types_1.publicUserSchema.parse(findedUser);
     }
     async createOne(dto) {
         return await this.prisma.user.create({

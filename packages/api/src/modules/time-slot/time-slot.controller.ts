@@ -8,27 +8,31 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { TimeSlotService } from './time-slot.service';
 import { CreateTimeSlotDto } from './dto/create.dto';
 import { UpdateTimeSlotDto } from './dto/update.dto';
 import { AllowedRoles, RolesGuard } from '../user-role';
+import { FindManyTimeSlotDto } from './dto/find.dto';
+import { ROLES } from 'src/constants/roles';
+import { TimeSlot } from 'generated/prisma/client';
 
 @Controller('time-slot')
 export class TimeSlotController {
   constructor(private readonly timeSlotService: TimeSlotService) {}
 
   @HttpCode(HttpStatus.CREATED)
-  @AllowedRoles('MASTER')
+  @AllowedRoles(ROLES.MASTER)
   @UseGuards(RolesGuard)
   @Post()
   async createOne(@Body() data: CreateTimeSlotDto) {
     return this.timeSlotService.createOne(data);
   }
 
-  @HttpCode(HttpStatus.CREATED)
-  @AllowedRoles('MASTER')
+  @HttpCode(HttpStatus.OK)
+  @AllowedRoles(ROLES.MASTER)
   @UseGuards(RolesGuard)
   @Put(':id')
   async updateOne(@Param('id') id: string, @Body() data: UpdateTimeSlotDto) {
@@ -42,7 +46,15 @@ export class TimeSlotController {
   }
 
   @Get()
-  async findMany() {
-    return this.timeSlotService.findMany();
+  async findMany(@Query() query: FindManyTimeSlotDto): Promise<TimeSlot[]> {
+    return this.timeSlotService.findMany({
+      where: {
+        masterId: query.masterId,
+        date: {
+          lte: query.startDate,
+          gte: query.endDate,
+        },
+      },
+    });
   }
 }

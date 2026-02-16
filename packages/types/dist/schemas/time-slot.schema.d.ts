@@ -13,4 +13,8 @@ export declare const updateOneTimeSlotSchema: z.ZodObject<{
     endTime: z.ZodOptional<z.ZodString>;
     masterId: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-//# sourceMappingURL=time-slot.schema.d.ts.map
+export declare const findManyTimeSlotSchema: z.ZodObject<{
+    startDate: z.ZodOptional<z.ZodDate>;
+    endDate: z.ZodOptional<z.ZodDate>;
+    masterId: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;

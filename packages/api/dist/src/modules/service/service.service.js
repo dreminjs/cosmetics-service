@@ -17,8 +17,8 @@ let ServiceService = class ServiceService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async createOne(dto) {
-        return await this.prisma.service.create(dto);
+    async createOne(args) {
+        return await this.prisma.service.create(args);
     }
     async updateOne(id, dto) {
         return await this.prisma.service.update({

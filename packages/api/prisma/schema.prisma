@@ -8,13 +8,13 @@ datasource db {
 }
 
 model User {
-  id                         String        @id @default(uuid())
+  id                     String        @id @default(uuid())
   name                   String
   phone                  String         @unique
-  hashedPassword String
-  refreshToken       RefreshToken?
-  booking               Booking[]
-  role                      UserRole[]
+  hashedPassword         String
+  refreshToken           RefreshToken?
+  booking                Booking[]
+  role                   UserRole[]
 }
 
 model RefreshToken {

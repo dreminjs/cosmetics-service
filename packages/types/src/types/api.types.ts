@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { paginationQuerySchema } from "../schemas/api.schema";
+import { paginationQuerySchema } from "../schemas/api.schema.js";
 
 export interface IAPIResponse<T> {
   data: T;

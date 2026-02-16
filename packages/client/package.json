@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cosmetic-services/types": "*",
+    "@tanstack/react-query": "^5.90.21",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@cosmetic-services/types": "*"
+    "react-router": "^7.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

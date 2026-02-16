@@ -7,4 +7,3 @@ export declare const updateBookingSchema: z.ZodObject<{
     masterId: z.ZodOptional<z.ZodString>;
     timeSlotId: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-//# sourceMappingURL=booking.schema.d.ts.map

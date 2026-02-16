@@ -10,4 +10,8 @@ export declare const updateUserRoleSchema: z.ZodObject<{
 export declare const deleteUserRoleSchema: z.ZodObject<{
     userId: z.ZodString;
 }, z.core.$strip>;
-//# sourceMappingURL=user.schema.d.ts.map
+export declare const publicUserSchema: z.ZodObject<{
+    id: z.ZodString;
+    name: z.ZodString;
+    phone: z.ZodString;
+}, z.core.$strip>;

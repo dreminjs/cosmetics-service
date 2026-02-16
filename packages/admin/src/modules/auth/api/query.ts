@@ -1,16 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { login, register, logout } from "./service";
+import { login, logout } from "./service";
+import type { AuthDto } from "@cosmetic-services/types";
 
 export const useLogin = () => {
-  return useMutation({
+  const { mutate, ...props } = useMutation({
     mutationFn: login,
   });
-};
 
-export const useRegister = () => {
-  return useMutation({
-    mutationFn: register,
-  });
+  return { mutate: (dto: AuthDto) => mutate(dto), ...props };
 };
 
 export const useLogout = () => {

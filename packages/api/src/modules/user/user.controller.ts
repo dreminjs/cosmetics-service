@@ -10,12 +10,14 @@ import {
 import { UserService } from './user.service';
 import { CurrentUser } from './user.decorator';
 import { AccessTokenGuard } from '../token/guards/access-token.guard';
-import { Role, User } from 'generated/prisma/client';
+import { Role } from 'generated/prisma/client';
 import { UserRoleService } from '../user-role';
 import { AllowedRoles } from '../user-role/roles.decorator';
 import { AssignUserRoleDto } from './dto/update.dto';
 import { UserRole } from 'generated/prisma/browser';
+import { TPublicUser } from '@cosmetic-services/types';
 
+@UseGuards(AccessTokenGuard)
 @Controller('users')
 export class UserController {
   constructor(
@@ -24,13 +26,8 @@ export class UserController {
   ) {}
 
   @Get('me')
-  @UseGuards(AccessTokenGuard)
-  async findMe(@CurrentUser('id') id: string): Promise<User | null> {
-    return await this.userService.findOne({
-      where: {
-        id,
-      },
-    });
+  async findMe(@CurrentUser('id') id: string): Promise<TPublicUser | null> {
+    return await this.userService.findPublicOne(id);
   }
 
   @AllowedRoles(Role.OWNER)

@@ -14,6 +14,7 @@ const common_1 = require("@nestjs/common");
 const token_service_1 = require("../token/token.service");
 const user_service_1 = require("../user/user.service");
 const bcrypt_1 = require("bcrypt");
+const client_1 = require("../../../generated/prisma/client");
 let AuthService = class AuthService {
     userService;
     tokenService;
@@ -26,6 +27,12 @@ let AuthService = class AuthService {
         const user = await this.userService.createOne({
             name: dto.name,
             hashedPassword: hashedPassword,
+            phone: dto.phone,
+            role: {
+                create: {
+                    role: client_1.Role.CUSTOMER,
+                },
+            },
         });
         return this.tokenService.generateTokens({
             userId: user.id,

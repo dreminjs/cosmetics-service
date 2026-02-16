@@ -30,7 +30,7 @@ let AccessTokenStrategy = class AccessTokenStrategy extends (0, passport_1.Passp
                 },
             ]),
             ignoreExpiration: false,
-            secretOrKey: configService.get('ACCESS_TOKEN'),
+            secretOrKey: process.env.ACCESS_KEY,
         });
         this.configService = configService;
         this.userService = userService;

@@ -11,7 +11,7 @@
     "admin:dev": "lerna run dev --scope=admin",
     "admin:build": "lerna run build --scope=admin",
     "admin:test": "lerna run test --scope=admin",
-    "shared:build": "lerna run build --scope=types"
+    "shared:build": "lerna run build --scope=@cosmetic-services/types"
   },
   "workspaces": [
     "packages/*"
@@ -23,7 +23,9 @@
     "class-validator": "^0.14.3"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
     "lerna": "^9.0.3",
+    "tailwindcss": "^3.4.3",
     "tsconfig-paths": "^4.2.0"
   }
 }

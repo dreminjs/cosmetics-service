@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "module": "ESNext",
+  "moduleResolution": "Bundler",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -15,7 +17,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.1",
-    "react-router": "^7.13.0"
+    "react-router": "^7.13.0",
+    "@cosmetic-services/types": "*"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

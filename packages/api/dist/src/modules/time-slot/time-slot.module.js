@@ -16,7 +16,7 @@ exports.TimeSlotModule = TimeSlotModule;
 exports.TimeSlotModule = TimeSlotModule = __decorate([
     (0, common_1.Module)({
         controllers: [time_slot_controller_1.TimeSlotController],
-        providers: [time_slot_service_1.TimeSlotService]
+        providers: [time_slot_service_1.TimeSlotService],
     })
 ], TimeSlotModule);
 //# sourceMappingURL=time-slot.module.js.map

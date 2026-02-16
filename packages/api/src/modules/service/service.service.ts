@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from 'generated/prisma/client';
+import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Injectable()
 export class ServiceService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public async createOne(dto: Prisma.ServiceCreateArgs) {
-    return await this.prisma.service.create(dto);
+  public async createOne(args: Prisma.ServiceCreateArgs) {
+    return await this.prisma.service.create(args);
   }
 
-  public async updateOne(id: string, dto: Prisma.ServiceUpdateArgs) {
+  public async updateOne(id: string, dto: UpdateServiceDto) {
     return await this.prisma.service.update({
       where: { id },
       data: dto,

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { paginationQuerySchema } from "../schemas/api.schema";
+import { paginationQuerySchema } from "../schemas/api.schema.js";
 export interface IAPIResponse<T> {
     data: T;
 }
@@ -11,4 +11,3 @@ export interface IWithPagination<T> {
     items: T[];
 }
 export type TPaginationQuery = z.infer<typeof paginationQuerySchema>;
-//# sourceMappingURL=api.types.d.ts.map

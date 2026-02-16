@@ -1,5 +1,5 @@
 import z from "zod";
-import { paginationQuerySchema } from "./api.schema";
+import { paginationQuerySchema } from "./api.schema.js";
 
 export const hireMasterFormSchema = z.object({
   name: z

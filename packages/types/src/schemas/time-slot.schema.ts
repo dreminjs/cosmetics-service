@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { maxSize } from "zod";
 
 export const createTimeSlotSchema = z.object({
   id: z.string().uuid(),
@@ -9,3 +9,9 @@ export const createTimeSlotSchema = z.object({
 });
 
 export const updateOneTimeSlotSchema = createTimeSlotSchema.partial();
+
+export const findManyTimeSlotSchema = z.object({
+  startDate: z.date().min(new Date()).optional(),
+  endDate: z.date().min(new Date()).optional(),
+  masterId: z.string().uuid().optional(),
+});

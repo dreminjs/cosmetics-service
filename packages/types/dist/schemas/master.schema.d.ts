@@ -15,4 +15,3 @@ export declare const findManyMasterQueryParamsSchema: z.ZodObject<{
     take: z.ZodDefault<z.ZodNumber>;
     serviceId: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
-//# sourceMappingURL=master.schema.d.ts.map

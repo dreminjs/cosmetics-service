@@ -16,35 +16,47 @@ exports.ServiceController = void 0;
 const common_1 = require("@nestjs/common");
 const service_service_1 = require("./service.service");
 const find_services_dto_1 = require("./dto/find-services.dto");
+const update_service_dto_1 = require("./dto/update-service.dto");
+const create_service_dto_1 = require("./dto/create-service.dto");
+const multipart_interceptor_1 = require("../../interceptors/multipart.interceptor");
+const file_decorator_1 = require("../../decorators/file.decorator");
+const minio_service_1 = require("../minio/minio.service");
 let ServiceController = class ServiceController {
     serviceService;
-    constructor(serviceService) {
+    minioService;
+    constructor(serviceService, minioService) {
         this.serviceService = serviceService;
+        this.minioService = minioService;
     }
     async findOneById(id) {
         return await this.serviceService.findOneById(id);
     }
     async findAll(dto) {
-        const servicesQuery = this.serviceService.findMany({
-            where: {
-                ...(dto.title ? { title: { contains: dto.title } } : {}),
-            },
+        const where = {
+            ...(dto.title ? { title: { contains: dto.title } } : {}),
+        };
+        const itemsQuery = this.serviceService.findMany({
+            where,
             skip: dto.skip,
             take: dto.take,
         });
         const countQuery = this.serviceService.count({
-            where: {
-                ...(dto.title ? { title: { contains: dto.title } } : {}),
+            where,
+        });
+        const [services, count] = await Promise.all([itemsQuery, countQuery]);
+        return { items: services, total: count };
+    }
+    async createOne(dto, files) {
+        const fileName = await this.minioService.upload(files.file[0]);
+        return await this.serviceService.createOne({
+            data: {
+                ...dto,
+                previewImage: fileName,
             },
         });
-        const [services, count] = await Promise.all([servicesQuery, countQuery]);
-        return { services, count };
     }
-    async createOne(data) {
-        return await this.serviceService.createOne({ data: data });
-    }
-    async updateOne(id, args) {
-        return await this.serviceService.updateOne(id, args);
+    async updateOne(id, dto) {
+        return await this.serviceService.updateOne(id, dto);
     }
     async deleteOne(id) {
         return await this.serviceService.deleteOne(id);
@@ -65,8 +77,33 @@ __decorate([
     __metadata("design:paramtypes", [find_services_dto_1.FindServiceQueryParamsDto]),
     __metadata("design:returntype", Promise)
 ], ServiceController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.UseInterceptors)((0, multipart_interceptor_1.MultipartInterceptor)({ fileType: 'jpeg', maxFileSize: 1000_000 })),
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, file_decorator_1.Files)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_service_dto_1.CreateServiceDto, Object]),
+    __metadata("design:returntype", Promise)
+], ServiceController.prototype, "createOne", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_service_dto_1.UpdateServiceDto]),
+    __metadata("design:returntype", Promise)
+], ServiceController.prototype, "updateOne", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ServiceController.prototype, "deleteOne", null);
 exports.ServiceController = ServiceController = __decorate([
     (0, common_1.Controller)('service'),
-    __metadata("design:paramtypes", [service_service_1.ServiceService])
+    __metadata("design:paramtypes", [service_service_1.ServiceService,
+        minio_service_1.MinioService])
 ], ServiceController);
 //# sourceMappingURL=service.controller.js.map

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, User } from 'generated/prisma/client';
-import {} from 'generated/prisma/client';
+import { TPublicUser, publicUserSchema } from '@cosmetic-services/types';
 
 @Injectable()
 export class UserService {
@@ -9,6 +9,20 @@ export class UserService {
 
   public async findOne(args: Prisma.UserFindFirstArgs): Promise<User | null> {
     return await this.prisma.user.findFirst(args);
+  }
+
+  public async findPublicOne(id: string): Promise<TPublicUser | null> {
+    const findedUser = await this.prisma.user.findFirst({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        name: true,
+        phone: true,
+      },
+    });
+    return publicUserSchema.parse(findedUser);
   }
 
   public async createOne(dto: Prisma.UserCreateInput): Promise<User> {
