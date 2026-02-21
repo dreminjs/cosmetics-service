@@ -1,14 +1,18 @@
+import { Header } from "@/components/header/Header";
 import { SideBar } from "@/components/sidebar/";
-import { useCheckAuth } from "@/hooks/use-check-auth";
+import { useAuthGuard } from "@/hooks/use-auth-guard";
 import { Outlet } from "react-router";
 
 export const BaseLayout = () => {
-  useCheckAuth();
+  useAuthGuard("private");
 
   return (
     <div className="flex">
       <SideBar />
-      <Outlet />
+      <div>
+        <Header />
+        <Outlet />
+      </div>
     </div>
   );
 };

@@ -8,23 +8,23 @@ export const instance = axios.create({
 
 let retryCount = 0;
 
-instance.interceptors.response.use(
-  (config) => config,
-  async (error) => {
-    const originalRequest = error.config;
-    if (
-      error.response.status === 401 ||
-      (error.config && !error.config._isRetry && retryCount < 2)
-    ) {
-      originalRequest._isRetry = true;
-      retryCount += 1;
-      try {
-        return instance.get("tokens");
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
+// instance.interceptors.response.use(
+//   (config) => config,
+//   async (error) => {
+//     const originalRequest = error.config;
+//     if (
+//       error.response.status === 401 ||
+//       (error.config && !error.config._isRetry && retryCount < 2)
+//     ) {
+//       originalRequest._isRetry = true;
+//       retryCount += 1;
+//       try {
+//         return instance.get("tokens");
+//       } catch (error: any) {
+//         console.log(error);
+//       }
+//     }
 
-    throw error;
-  }
-);
+//     throw error;
+//   }
+// );

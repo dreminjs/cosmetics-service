@@ -1,12 +1,12 @@
-import type { AuthDto } from "@cosmetic-services/types";
+import type { SigninDto } from "@cosmetic-services/types";
 import type { FC } from "react";
 import type { UseFormRegister } from "react-hook-form";
 
 interface IProps {
   label: string;
   error?: string;
-  register: UseFormRegister<AuthDto>;
-  name: keyof AuthDto;
+  register: UseFormRegister<SigninDto>;
+  name: keyof SigninDto;
   placeholder: string;
 }
 

@@ -1,30 +1,27 @@
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { AuthFormField } from "./AuthFormField";
-import { AuthDtoSchema, type AuthDto } from "@cosmetic-services/types";
-import type { FC } from "react";
+import { useLogin } from "../api/query";
+import { type SigninDto, SigninDtoSchema } from "@cosmetic-services/types";
 
-interface IProps {
-  onSubmit: (data: AuthDto) => void;
-}
-
-export const AuthForm: FC<IProps> = ({ onSubmit }) => {
+export const SigninForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthDto>({
-    resolver: zodResolver(AuthDtoSchema),
+  } = useForm<SigninDto>({
+    resolver: zodResolver(SigninDtoSchema),
   });
+  const { mutate } = useLogin();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(mutate)}>
       <AuthFormField
-        placeholder="Введите никнейм"
+        placeholder="Введите номер телефона"
         register={register}
-        label={"никнейм"}
-        name={"name"}
-        error={errors.name?.message}
+        label={"номер телефона"}
+        name={"phone"}
+        error={errors.phone?.message}
       />
       <AuthFormField
         placeholder="Введите пароль"

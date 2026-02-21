@@ -1,9 +1,15 @@
-import { Outlet } from "react-router";
+import { useAuthGuard } from "@/hooks/use-auth-guard";
+import type { FC, ReactNode } from "react";
 
-export const AuthPageLayout = () => {
+interface IProps {
+  children: ReactNode;
+}
+
+export const AuthPageLayout: FC<IProps> = ({ children }) => {
+  useAuthGuard("guest");
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <Outlet />
+      {children}
     </div>
   );
 };

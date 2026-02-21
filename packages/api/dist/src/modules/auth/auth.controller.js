@@ -38,7 +38,7 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.AuthDto, Object]),
+    __metadata("design:paramtypes", [auth_dto_1.SignupDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
 __decorate([
@@ -46,7 +46,7 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.AuthDto, Object]),
+    __metadata("design:paramtypes", [auth_dto_1.SigninDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([

@@ -1,7 +1,9 @@
-import { AuthForm, useLogin } from "../../modules/auth";
+import { AuthPageLayout, SigninForm } from "@/modules/auth";
 
 export const LoginPage = () => {
-  const { mutate } = useLogin();
-
-  return <AuthForm onSubmit={mutate} />;
+  return (
+    <AuthPageLayout>
+      <SigninForm />
+    </AuthPageLayout>
+  );
 };

@@ -41,7 +41,7 @@ let AuthService = class AuthService {
     async login(dto, res) {
         const user = await this.userService.findOne({
             where: {
-                name: dto.name,
+                phone: dto.phone,
             },
         });
         if (!user) {

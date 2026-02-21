@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { TokenService } from '../token/token.service';
 import { UserService } from '../user/user.service';
-import { AuthDto } from './dto/auth.dto';
 import { FastifyReply } from 'fastify';
 import { hash, compare } from 'bcrypt';
 import { Role } from 'generated/prisma/client';
+import { SigninDto, SignupDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
   ) {}
 
-  async register(dto: AuthDto, res: FastifyReply) {
+  async register(dto: SignupDto, res: FastifyReply) {
     const hashedPassword = await hash(dto.password, 10);
 
     const user = await this.userService.createOne({
@@ -35,10 +35,10 @@ export class AuthService {
     );
   }
 
-  async login(dto: AuthDto, res: FastifyReply) {
+  async login(dto: SigninDto, res: FastifyReply) {
     const user = await this.userService.findOne({
       where: {
-        name: dto.name,
+        phone: dto.phone,
       },
     });
 

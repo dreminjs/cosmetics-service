@@ -1,4 +1,6 @@
 import { z } from "zod";
-import { AuthDtoSchema } from "../schemas/auth.schema.js";
+import { SigninDtoSchema, SignupDtoSchema } from "../schemas/auth.schema";
 
-export type AuthDto = z.infer<typeof AuthDtoSchema>;
+export type SignupDto = z.infer<typeof SignupDtoSchema>;
+
+export type SigninDto = z.infer<typeof SigninDtoSchema>;

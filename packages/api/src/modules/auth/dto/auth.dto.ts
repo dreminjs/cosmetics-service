@@ -1,4 +1,6 @@
-import { AuthDtoSchema } from '@cosmetic-services/types';
+import { SigninDtoSchema, SignupDtoSchema } from '@cosmetic-services/types';
 import { createZodDto } from 'nestjs-zod';
 
-export class AuthDto extends createZodDto(AuthDtoSchema) {}
+export class SignupDto extends createZodDto(SignupDtoSchema) {}
+
+export class SigninDto extends createZodDto(SigninDtoSchema) {}

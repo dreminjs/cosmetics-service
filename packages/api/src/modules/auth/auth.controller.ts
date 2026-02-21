@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Post, Res } from '@nestjs/common';
-import { AuthDto } from './dto/auth.dto';
+import { SigninDto, SignupDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { CurrentUser } from '../user/user.decorator';
 import { IStandartResponse } from '@cosmetic-services/types';
@@ -11,7 +11,7 @@ export class AuthController {
 
   @Post('register')
   async register(
-    @Body() dto: AuthDto,
+    @Body() dto: SignupDto,
     @Res({ passthrough: true }) response: FastifyReply,
   ): Promise<IStandartResponse> {
     return this.authService.register(dto, response);
@@ -19,7 +19,7 @@ export class AuthController {
 
   @Post('login')
   async login(
-    @Body() dto: AuthDto,
+    @Body() dto: SigninDto,
     @Res({ passthrough: true }) response: FastifyReply,
   ): Promise<IStandartResponse> {
     return this.authService.login(dto, response);
