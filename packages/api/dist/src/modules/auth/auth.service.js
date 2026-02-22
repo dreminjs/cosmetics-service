@@ -40,9 +40,7 @@ let AuthService = class AuthService {
     }
     async login(dto, res) {
         const user = await this.userService.findOne({
-            where: {
-                phone: dto.phone,
-            },
+            phone: dto.phone,
         });
         if (!user) {
             throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);

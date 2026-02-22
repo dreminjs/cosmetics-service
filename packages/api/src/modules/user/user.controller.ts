@@ -10,12 +10,12 @@ import {
 import { UserService } from './user.service';
 import { CurrentUser } from './user.decorator';
 import { AccessTokenGuard } from '../token/guards/access-token.guard';
-import { Role } from 'generated/prisma/client';
 import { UserRoleService } from '../user-role';
 import { AllowedRoles } from '../user-role/roles.decorator';
 import { AssignUserRoleDto } from './dto/update.dto';
 import { UserRole } from 'generated/prisma/browser';
 import { TPublicUser } from '@cosmetic-services/types';
+import { Role } from 'generated/prisma/enums';
 
 @UseGuards(AccessTokenGuard)
 @Controller('users')

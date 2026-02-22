@@ -8,9 +8,11 @@ import { MinioModule } from '../minio/minio.module';
 import { UserModule } from '../user/user.module';
 import { UserRoleModule } from '../user-role';
 import { ConfigModule } from '@nestjs/config';
+import { UserAdminModule } from '../user-admin/user-admin.module';
 
 @Module({
   imports: [
+    UserAdminModule,
     AuthModule,
     MasterModule,
     ServiceModule,

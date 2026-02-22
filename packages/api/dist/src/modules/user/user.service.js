@@ -8,18 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var UserService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const types_1 = require("@cosmetic-services/types");
-let UserService = class UserService {
+let UserService = UserService_1 = class UserService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findOne(args) {
-        return await this.prisma.user.findFirst(args);
+    logger = new common_1.Logger(UserService_1.name);
+    async findOne(whereOptions) {
+        return await this.prisma.user.findFirst({
+            where: whereOptions,
+        });
     }
     async findPublicOne(id) {
         const findedUser = await this.prisma.user.findFirst({
@@ -33,6 +37,24 @@ let UserService = class UserService {
             },
         });
         return types_1.publicUserSchema.parse(findedUser);
+    }
+    async findPrivateOne(id) {
+        const findedUser = await this.prisma.user.findFirst({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+                name: true,
+                phone: true,
+                role: {
+                    select: {
+                        role: true,
+                    },
+                },
+            },
+        });
+        return types_1.privateUserSchema.parse(findedUser);
     }
     async createOne(dto) {
         return await this.prisma.user.create({
@@ -49,7 +71,7 @@ let UserService = class UserService {
     }
 };
 exports.UserService = UserService;
-exports.UserService = UserService = __decorate([
+exports.UserService = UserService = UserService_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], UserService);

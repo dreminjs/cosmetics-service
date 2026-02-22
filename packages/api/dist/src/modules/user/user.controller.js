@@ -17,10 +17,10 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const user_decorator_1 = require("./user.decorator");
 const access_token_guard_1 = require("../token/guards/access-token.guard");
-const client_1 = require("../../../generated/prisma/client");
 const user_role_1 = require("../user-role");
 const roles_decorator_1 = require("../user-role/roles.decorator");
 const update_dto_1 = require("./dto/update.dto");
+const enums_1 = require("../../../generated/prisma/enums");
 let UserController = class UserController {
     userService;
     userRoleService;
@@ -44,7 +44,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findMe", null);
 __decorate([
-    (0, roles_decorator_1.AllowedRoles)(client_1.Role.OWNER),
+    (0, roles_decorator_1.AllowedRoles)(enums_1.Role.OWNER),
     (0, common_1.Patch)('/:userId/role'),
     __param(0, (0, common_1.Param)('userId', common_1.ParseUUIDPipe)),
     __param(1, (0, common_1.Body)()),

@@ -15,4 +15,5 @@ export const PAGE_KEYS = {
   register: "register",
   login: "/",
   orders: "/orders",
+  services: "/services",
 } as const;

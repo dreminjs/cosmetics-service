@@ -1,18 +1,21 @@
+import { TPrivateUser } from '@cosmetic-services/types';
 import {
   createParamDecorator,
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
 import { FastifyRequest } from 'fastify';
-import { User } from 'generated/prisma/client';
 
 export const CurrentUser = createParamDecorator(
-  (data: keyof User | undefined, ctx: ExecutionContext): User | string => {
+  <K extends keyof TPrivateUser>(
+    data: K | undefined,
+    ctx: ExecutionContext,
+  ): TPrivateUser | TPrivateUser[K] => {
     const request = ctx
       .switchToHttp()
-      .getRequest<FastifyRequest & { user?: User }>();
-    const user = request.user as User;
+      .getRequest<FastifyRequest & { user?: TPrivateUser }>();
 
+    const user = request.user;
     if (!user) {
       throw new UnauthorizedException('User not found in the request');
     }

@@ -1,6 +1,5 @@
 import z from "zod";
 export declare const serviceSchema: z.ZodObject<{
-    id: z.ZodString;
     title: z.ZodString;
     description: z.ZodString;
     price: z.ZodNumber;

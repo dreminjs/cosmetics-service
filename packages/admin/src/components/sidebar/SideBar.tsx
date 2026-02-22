@@ -1,16 +1,15 @@
 import { useSidebarStore } from "@/app/store/sidebar.store";
-import clsx from "clsx";
+import { Menu } from "./menu/Menu";
+import { SideBarWrapper } from "./SideBarWrapper";
 export const SideBar = () => {
-  const isOpen = useSidebarStore((state) => state.isOpen);
+  const { isOpen, toggle } = useSidebarStore();
 
   return (
-    <div
-      className={clsx(
-        "border-2 min-h-screen basis-[300px] md:hidden",
-        isOpen ? "block" : "hidden",
-      )}
-    >
-      <h1>SideBar</h1>
-    </div>
+    <SideBarWrapper isOpen={isOpen}>
+      <button className="md:hidden mb-5" onClick={toggle}>
+        close
+      </button>
+      <Menu />
+    </SideBarWrapper>
   );
 };

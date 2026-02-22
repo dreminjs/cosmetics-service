@@ -17,12 +17,14 @@ const minio_module_1 = require("../minio/minio.module");
 const user_module_1 = require("../user/user.module");
 const user_role_1 = require("../user-role");
 const config_1 = require("@nestjs/config");
+const user_admin_module_1 = require("../user-admin/user-admin.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            user_admin_module_1.UserAdminModule,
             auth_1.AuthModule,
             master_module_1.MasterModule,
             service_module_1.ServiceModule,

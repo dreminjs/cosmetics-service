@@ -6,6 +6,6 @@ export const useGetMySelf = () => {
   return useQuery({
     queryKey: [API_KEYS.users, SERVICE_KEYS.me],
     queryFn: () => findMySelf(),
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
   });
 };

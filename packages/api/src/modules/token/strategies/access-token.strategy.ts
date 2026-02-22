@@ -4,7 +4,7 @@ import { Strategy, ExtractJwt } from 'passport-jwt';
 import { UserService } from '../../user/user.service';
 import { ITokenPayload } from '../token.interface';
 import { Injectable } from '@nestjs/common';
-import { User } from 'generated/prisma/client';
+import { TPrivateUser } from '@cosmetic-services/types';
 
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(
@@ -30,7 +30,7 @@ export class AccessTokenStrategy extends PassportStrategy(
     });
   }
 
-  async validate({ userId }: ITokenPayload): Promise<User | null> {
-    return await this.userService.findOne({ where: { id: userId } });
+  async validate({ userId }: ITokenPayload): Promise<TPrivateUser | null> {
+    return await this.userService.findPrivateOne(userId);
   }
 }

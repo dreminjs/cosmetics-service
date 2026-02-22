@@ -37,9 +37,7 @@ export class AuthService {
 
   async login(dto: SigninDto, res: FastifyReply) {
     const user = await this.userService.findOne({
-      where: {
-        phone: dto.phone,
-      },
+      phone: dto.phone,
     });
 
     if (!user) {

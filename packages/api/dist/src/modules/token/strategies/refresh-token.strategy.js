@@ -36,7 +36,7 @@ let RefreshTokenStrategy = class RefreshTokenStrategy extends (0, passport_1.Pas
         this.userService = userService;
     }
     async validate({ userId }) {
-        return await this.userService.findOne({ where: { id: userId } });
+        return await this.userService.findOne({ id: userId });
     }
 };
 exports.RefreshTokenStrategy = RefreshTokenStrategy;

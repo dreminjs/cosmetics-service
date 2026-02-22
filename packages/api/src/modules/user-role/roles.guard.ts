@@ -4,6 +4,7 @@ import {
   ExecutionContext,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from './roles.decorator';
@@ -12,6 +13,8 @@ import { User } from 'generated/prisma/client';
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
+  private logger = new Logger(RolesGuard.name);
+
   canActivate(context: ExecutionContext): boolean {
     const requiredRoles = this.reflector.getAllAndOverride<string[]>(
       ROLES_KEY,
@@ -19,6 +22,8 @@ export class RolesGuard implements CanActivate {
     );
 
     const user = context.switchToHttp().getRequest().user satisfies User;
+
+    this.logger.log(user);
 
     const isAuthorized = requiredRoles.some((role) =>
       user.role?.includes(role),

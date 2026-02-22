@@ -5,6 +5,7 @@ import { BaseLayout } from "@/layouts/BaseLayout";
 import { OrdersPage } from "@/modules/orders";
 import { CommonProvider } from "./providers/CommonProvider";
 import { PAGE_KEYS } from "@/shared";
+import { ServicesPage } from "@/pages/services";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
           {
             path: PAGE_KEYS.orders,
             Component: OrdersPage,
+          },
+          {
+            path: PAGE_KEYS.services,
+            Component: ServicesPage,
           },
         ],
       },

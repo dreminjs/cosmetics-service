@@ -36,7 +36,7 @@ let AccessTokenStrategy = class AccessTokenStrategy extends (0, passport_1.Passp
         this.userService = userService;
     }
     async validate({ userId }) {
-        return await this.userService.findOne({ where: { id: userId } });
+        return await this.userService.findPrivateOne(userId);
     }
 };
 exports.AccessTokenStrategy = AccessTokenStrategy;
